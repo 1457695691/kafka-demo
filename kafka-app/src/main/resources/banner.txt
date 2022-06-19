@@ -1,0 +1,12 @@
+${AnsiColor.BRIGHT_RED}//////////////////////////////////////////////////////////
+${AnsiColor.MAGENTA}
+${AnsiColor.MAGENTA}██╗     ██╗    ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗
+${AnsiColor.MAGENTA}██║     ██║    ██║  ██║██╔══██╗████╗  ██║██╔════╝
+${AnsiColor.MAGENTA}██║     ██║    ███████║███████║██╔██╗ ██║██║  ███╗
+${AnsiColor.MAGENTA}██║     ██║    ██╔══██║██╔══██║██║╚██╗██║██║   ██║
+${AnsiColor.MAGENTA}███████╗██║    ██║  ██║██║  ██║██║ ╚████║╚██████╔╝
+${AnsiColor.MAGENTA}╚══════╝╚═╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝
+${AnsiColor.MAGENTA}
+${AnsiColor.BRIGHT_RED}///////////////////////////////////////////////////////////
+${AnsiColor.MAGENTA} Application Version: spring-boot:2.5.6
+
