@@ -66,4 +66,10 @@
             ID = #{id,jdbcType=BIGINT}
         ]]>
     </select>
+
+    <!--获取全部数据  mydalgen自动生成，请勿修改-->
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT /*MS-CARD-GETALL*/ ID_CARD
+        FROM card
+    </select>
 </mapper>

@@ -21,15 +21,12 @@ public interface CardDOMapper {
 
     /**
      * desc:批量插入表:card.<br/>
-     *
      * @param list list
      * @return Long
      */
     Long insertBatch(List<CardDO> list);
-
     /**
      * desc:根据主键删除数据:card.<br/>
-     *
      * @param id id
      * @return Long
      */
@@ -42,4 +39,11 @@ public interface CardDOMapper {
      * @return CardDO
      */
     CardDO getById(Long id);
+
+    /**
+     * desc:获取全部数据.<br/>
+     *
+     * @return List<CardDO>
+     */
+    List<CardDO> getAll();
 }

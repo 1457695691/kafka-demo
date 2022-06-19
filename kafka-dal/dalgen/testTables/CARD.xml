@@ -70,4 +70,8 @@
         ]]>
     </operation>
 
+    <operation name="getAll" multiplicity="many" remark="获取全部数据">
+        SELECT ID_CARD
+        FROM card
+    </operation>
 </table>

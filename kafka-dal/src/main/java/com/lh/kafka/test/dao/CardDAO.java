@@ -56,4 +56,13 @@ public class CardDAO {
     public CardDO getById(Long id) {
         return cardDOMapper.getById(id);
     }
+
+    /**
+     * desc:获取全部数据.<br/>
+     *
+     * @return List<CardDO>
+     */
+    public List<CardDO> getAll() {
+        return cardDOMapper.getAll();
+    }
 }

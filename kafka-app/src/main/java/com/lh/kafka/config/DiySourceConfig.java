@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-public class DiySourceDentalConfig {
+public class DiySourceConfig {
 
     @Value("${config.jdbc.driver}")
     private String driver;
