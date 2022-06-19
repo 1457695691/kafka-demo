@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +32,8 @@ public class ConsumerDemo {
      * @param record 变量代表消息本身，可以通过ConsumerRecord<?,?>类型的record变量来打印接收的消息的各种信息
      */
     @Transactional(rollbackFor = Exception.class)
-    @KafkaListener(groupId = GROUP_ID, topics = TOPIC_NAME, containerFactory = "kafkaListenerContainerFactory")
-    public void consumer(ConsumerRecord<?, ?> record, Acknowledgment ack) throws Exception {
+    @KafkaListener(groupId = GROUP_ID, topics = TOPIC_NAME)
+    public void consumer(ConsumerRecord<?, ?> record) {
         log.info("topic is {}, offset is {}, value is {} ", record.topic(), record.offset(), record.value());
         //校验卡号是否有效
         if (CardUtils.isBankCard(String.valueOf(record.value()))) {
@@ -45,8 +44,6 @@ public class ConsumerDemo {
             //业务错误处理
             log.error("topic:{} is error ,offset is {}, value is {}.", record.topic(), record.offset(), record.value());
         }
-        //手动ack
-        ack.acknowledge();
         log.info("kafka processMessage end");
     }
 }
