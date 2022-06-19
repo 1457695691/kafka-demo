@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 数据库基本配置
- * 走配置中心，无需走文件
- *
- * @PropertySource(value={"classpath:jdbc.properties"})
  */
 
 @Configuration
