@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  */
 public class CardUtils extends StringUtils {
 
+
     /**
      * 校验银行卡有效性
      * (正则规则：长度16，前6位622566，7、8位产品类型，有效值01、02、03)
