@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * 数据库字段检查
  */
-public interface DBPreCheckMapper {
+public interface DBPreCheckMapper{
 
     List<String> dbColumnCheck();
 }

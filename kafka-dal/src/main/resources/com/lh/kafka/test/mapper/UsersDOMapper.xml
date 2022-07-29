@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lh.kafka.test.mapper.UsersDOMapper">
+    <!-- 自动生成,请修改 USERS.xml -->
+    <resultMap id="BaseResultMap"  type="com.lh.kafka.test.entity.UsersDO">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR" javaType="String" />
+        <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" javaType="String" />
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" javaType="String" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" javaType="String" />
+        <result column="GENDER" property="gender" jdbcType="SMALLINT" javaType="Integer" />
+        <result column="STATUS" property="status" jdbcType="SMALLINT" javaType="Integer" />
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.PHONE,sf.USER_PWD,sf.REAL_NAME,sf.USER_NAME
+        ,sf.GENDER,sf.STATUS
+    </sql>
+    <sql id="Base_Column_List">
+        ID,PHONE,USER_PWD,REAL_NAME,USER_NAME
+        ,GENDER,STATUS
+    </sql>
+
+
+    <!--插入表:users  mydalgen自动生成，请勿修改-->
+    <insert id="insert"  >
+            <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+                SELECT
+                LAST_INSERT_ID()
+            </selectKey>
+            <![CDATA[
+            INSERT INTO users(
+                    ID
+                    ,PHONE
+                    ,USER_PWD
+                    ,REAL_NAME
+                    ,USER_NAME
+                    ,GENDER
+                    ,STATUS
+            )VALUES(
+                     null
+                    , #{phone,jdbcType=VARCHAR}
+                    , #{userPwd,jdbcType=VARCHAR}
+                    , #{realName,jdbcType=VARCHAR}
+                    , #{userName,jdbcType=VARCHAR}
+                    , #{gender,jdbcType=SMALLINT}
+                    , #{status,jdbcType=SMALLINT}
+            )
+            ]]>
+    </insert>
+
+    <!--批量插入表:users  mydalgen自动生成，请勿修改-->
+    <insert id="insertBatch"  >
+            INSERT INTO users(
+                    ID
+                    ,PHONE
+                    ,USER_PWD
+                    ,REAL_NAME
+                    ,USER_NAME
+                    ,GENDER
+                    ,STATUS
+            )VALUES
+            <foreach collection="list"  item="item" separator=",">
+                (
+                     null
+                    , #{item.phone,jdbcType=VARCHAR}
+                    , #{item.userPwd,jdbcType=VARCHAR}
+                    , #{item.realName,jdbcType=VARCHAR}
+                    , #{item.userName,jdbcType=VARCHAR}
+                    , #{item.gender,jdbcType=SMALLINT}
+                    , #{item.status,jdbcType=SMALLINT}
+                )
+            </foreach>
+    </insert>
+
+    <!--根据主键删除数据:users  mydalgen自动生成，请勿修改-->
+    <delete id="deleteById"  >
+        <![CDATA[
+        DELETE /*MS-USERS-DELETEBYID*/ FROM users
+        WHERE
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </delete>
+
+    <!--根据主键获取数据:users  mydalgen自动生成，请勿修改-->
+    <select id="getById" resultMap="BaseResultMap" >
+        SELECT /*MS-USERS-GETBYID*/  <include refid="Base_Column_List" />
+        FROM users
+        WHERE
+        <![CDATA[
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </select>
+
+    <!--根据唯一约束UsersPhone更新表:users  mydalgen自动生成，请勿修改-->
+    <update id="updateByUsersPhone"  >
+        <![CDATA[
+        UPDATE /*MS-USERS-UPDATEBYUSERSPHONE*/ users
+        SET
+            USER_PWD        = #{userPwd,jdbcType=VARCHAR}
+            ,REAL_NAME       = #{realName,jdbcType=VARCHAR}
+            ,USER_NAME       = #{userName,jdbcType=VARCHAR}
+            ,GENDER          = #{gender,jdbcType=SMALLINT}
+            ,STATUS          = #{status,jdbcType=SMALLINT}
+        WHERE
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </update>
+
+    <!--根据唯一约束UsersPhone删除数据:users  mydalgen自动生成，请勿修改-->
+    <delete id="deleteByUsersPhone"  >
+        <![CDATA[
+        DELETE /*MS-USERS-DELETEBYUSERSPHONE*/ FROM users
+        WHERE
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </delete>
+
+    <!--根据唯一约束UsersPhone获取数据:users  mydalgen自动生成，请勿修改-->
+    <select id="getByUsersPhone" resultMap="BaseResultMap" >
+        SELECT /*MS-USERS-GETBYUSERSPHONE*/  <include refid="Base_Column_List" />
+        FROM users
+        WHERE
+        <![CDATA[
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </select>
+
+    <!--getByUsersUserName  mydalgen自动生成，请勿修改-->
+    <select id="getByUsersUserName" resultMap="BaseResultMap" >
+        SELECT /*MS-USERS-GETBYUSERSUSERNAME*/  <include refid="Base_Column_List" />
+        FROM users
+        WHERE
+        <![CDATA[
+            USER_NAME           = #{phone,jdbcType=VARCHAR}
+        ]]>
+        and status = 0
+    </select>
+</mapper>

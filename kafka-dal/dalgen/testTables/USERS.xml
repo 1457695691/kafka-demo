@@ -1,0 +1,143 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="users" physicalName="users" remark="用户表">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID,PHONE,USER_PWD,REAL_NAME,USER_NAME
+        ,GENDER,STATUS
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.PHONE,sf.USER_PWD,sf.REAL_NAME,sf.USER_NAME
+        ,sf.GENDER,sf.STATUS
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:users" autoGen="true">
+            <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+                SELECT
+                LAST_INSERT_ID()
+            </selectKey>
+            <![CDATA[
+            INSERT INTO users(
+                    ID
+                    ,PHONE
+                    ,USER_PWD
+                    ,REAL_NAME
+                    ,USER_NAME
+                    ,GENDER
+                    ,STATUS
+            )VALUES(
+                     null
+                    , #{phone,jdbcType=VARCHAR}
+                    , #{userPwd,jdbcType=VARCHAR}
+                    , #{realName,jdbcType=VARCHAR}
+                    , #{userName,jdbcType=VARCHAR}
+                    , #{gender,jdbcType=SMALLINT}
+                    , #{status,jdbcType=SMALLINT}
+            )
+            ]]>
+    </operation>
+
+    <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
+    <!-- 只有一个参数且为List时必须将参数命名为list -->
+    <operation name="insertBatch" paramtype="objectList" remark="批量插入表:users"  autoGen="true">
+            INSERT INTO users(
+                    ID
+                    ,PHONE
+                    ,USER_PWD
+                    ,REAL_NAME
+                    ,USER_NAME
+                    ,GENDER
+                    ,STATUS
+            )VALUES
+            <foreach collection="list"  item="item" separator=",">
+                (
+                     null
+                    , #{item.phone,jdbcType=VARCHAR}
+                    , #{item.userPwd,jdbcType=VARCHAR}
+                    , #{item.realName,jdbcType=VARCHAR}
+                    , #{item.userName,jdbcType=VARCHAR}
+                    , #{item.gender,jdbcType=SMALLINT}
+                    , #{item.status,jdbcType=SMALLINT}
+                )
+            </foreach>
+    </operation>
+
+    <!-- 不推荐使用全 update 有需要自己打开
+    <operation name="update" paramtype="object" remark="更新表:users"  autoGen="true">
+        <![CDATA[
+        UPDATE users
+        SET
+            PHONE           = #{phone,jdbcType=VARCHAR}
+            ,USER_PWD        = #{userPwd,jdbcType=VARCHAR}
+            ,REAL_NAME       = #{realName,jdbcType=VARCHAR}
+            ,USER_NAME       = #{userName,jdbcType=VARCHAR}
+            ,GENDER          = #{gender,jdbcType=SMALLINT}
+            ,STATUS          = #{status,jdbcType=SMALLINT}
+        WHERE
+            ID              = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+    -->
+    <operation name="deleteById"  remark="根据主键删除数据:users">
+        <![CDATA[
+        DELETE FROM users
+        WHERE
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <operation name="getById" multiplicity="one" remark="根据主键获取数据:users">
+        SELECT *
+        FROM users
+        WHERE
+        <![CDATA[
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <!-- 根据唯一约束操作数据 -->
+    <operation name="updateByUsersPhone" paramtype="object" remark="根据唯一约束UsersPhone更新表:users">
+        <![CDATA[
+        UPDATE users
+        SET
+            USER_PWD        = #{userPwd,jdbcType=VARCHAR}
+            ,REAL_NAME       = #{realName,jdbcType=VARCHAR}
+            ,USER_NAME       = #{userName,jdbcType=VARCHAR}
+            ,GENDER          = #{gender,jdbcType=SMALLINT}
+            ,STATUS          = #{status,jdbcType=SMALLINT}
+        WHERE
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </operation>
+
+    <operation name="deleteByUsersPhone" remark="根据唯一约束UsersPhone删除数据:users">
+        <![CDATA[
+        DELETE FROM users
+        WHERE
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </operation>
+
+    <operation name="getByUsersPhone" multiplicity="one" remark="根据唯一约束UsersPhone获取数据:users">
+        SELECT *
+        FROM users
+        WHERE
+        <![CDATA[
+            PHONE           = #{phone,jdbcType=VARCHAR}
+        ]]>
+    </operation>
+
+    <!-- ================自定义============= -->
+    <operation name="getByUsersUserName" multiplicity="one">
+        SELECT *
+        FROM users
+        WHERE
+        <![CDATA[
+            USER_NAME           = #{phone,jdbcType=VARCHAR}
+        ]]>
+        and status = 0
+    </operation>
+
+</table>

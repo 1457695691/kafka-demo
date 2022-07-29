@@ -1,4 +1,4 @@
-package com.lh.kafka.service;
+package com.lh.kafka.service.producer;
 
 /**
  * 生产者service

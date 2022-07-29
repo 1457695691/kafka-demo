@@ -12,11 +12,11 @@
     </sql>
 
     <operation name="insert" paramtype="object" remark="插入表:card" autoGen="true">
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
-        <![CDATA[
+            <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+                SELECT
+                LAST_INSERT_ID()
+            </selectKey>
+            <![CDATA[
             INSERT INTO card(
                     ID
                     ,ID_CARD
@@ -29,17 +29,17 @@
 
     <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
     <!-- 只有一个参数且为List时必须将参数命名为list -->
-    <operation name="insertBatch" paramtype="objectList" remark="批量插入表:card" autoGen="true">
-        INSERT INTO card(
-        ID
-        ,ID_CARD
-        )VALUES
-        <foreach collection="list" item="item" separator=",">
-            (
-            null
-            , #{item.idCard,jdbcType=VARCHAR}
-            )
-        </foreach>
+    <operation name="insertBatch" paramtype="objectList" remark="批量插入表:card"  autoGen="true">
+            INSERT INTO card(
+                    ID
+                    ,ID_CARD
+            )VALUES
+            <foreach collection="list"  item="item" separator=",">
+                (
+                     null
+                    , #{item.idCard,jdbcType=VARCHAR}
+                )
+            </foreach>
     </operation>
 
     <!-- 不推荐使用全 update 有需要自己打开
@@ -53,7 +53,7 @@
         ]]>
     </operation>
     -->
-    <operation name="deleteById" remark="根据主键删除数据:card">
+    <operation name="deleteById"  remark="根据主键删除数据:card">
         <![CDATA[
         DELETE FROM card
         WHERE
@@ -70,8 +70,4 @@
         ]]>
     </operation>
 
-    <operation name="getAll" multiplicity="many" remark="获取全部数据">
-        SELECT ID_CARD
-        FROM card
-    </operation>
 </table>

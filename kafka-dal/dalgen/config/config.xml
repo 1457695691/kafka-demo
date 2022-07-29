@@ -27,7 +27,7 @@
     <database name="test" class="com.mysql.cj.jdbc.Driver" type="mysql">
         <property name="url" value="jdbc:mysql://localhost:3306/test"/>
         <property name="userid" value="root"/>
-        <property name="password" value="test123456"/>
+        <property name="password" value="ywx"/>
     </database>
 
     <!-- ========project.name pom.xml中的值========================= -->

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lh.kafka.test.mapper.WechatUserDOMapper">
+    <!-- 自动生成,请修改 WECHAT_USER.xml -->
+    <resultMap id="BaseResultMap"  type="com.lh.kafka.test.entity.WechatUserDO">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long" />
+        <result column="USER_ID" property="userId" jdbcType="BIGINT" javaType="Long" />
+        <result column="PIC" property="pic" jdbcType="VARCHAR" javaType="String" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String" />
+        <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" javaType="String" />
+        <result column="UNION_ID" property="unionId" jdbcType="VARCHAR" javaType="String" />
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.USER_ID,sf.PIC,sf.NAME,sf.OPEN_ID 
+        ,sf.UNION_ID
+    </sql>
+    <sql id="Base_Column_List">
+        ID,USER_ID,PIC,NAME,OPEN_ID 
+        ,UNION_ID
+    </sql>
+
+
+    <!--插入表:wechat_user  mydalgen自动生成，请勿修改-->
+    <insert id="insert"  >
+            <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+                SELECT
+                LAST_INSERT_ID()
+            </selectKey>
+            <![CDATA[
+            INSERT INTO wechat_user(
+                    ID
+                    ,USER_ID
+                    ,PIC
+                    ,NAME
+                    ,OPEN_ID
+                    ,UNION_ID
+            )VALUES(
+                     null
+                    , #{userId,jdbcType=BIGINT}
+                    , #{pic,jdbcType=VARCHAR}
+                    , #{name,jdbcType=VARCHAR}
+                    , #{openId,jdbcType=VARCHAR}
+                    , #{unionId,jdbcType=VARCHAR}
+            )
+            ]]>
+    </insert>
+
+    <!--批量插入表:wechat_user  mydalgen自动生成，请勿修改-->
+    <insert id="insertBatch"  >
+            INSERT INTO wechat_user(
+                    ID
+                    ,USER_ID
+                    ,PIC
+                    ,NAME
+                    ,OPEN_ID
+                    ,UNION_ID
+            )VALUES
+            <foreach collection="list"  item="item" separator=",">
+                (
+                     null
+                    , #{item.userId,jdbcType=BIGINT}
+                    , #{item.pic,jdbcType=VARCHAR}
+                    , #{item.name,jdbcType=VARCHAR}
+                    , #{item.openId,jdbcType=VARCHAR}
+                    , #{item.unionId,jdbcType=VARCHAR}
+                )
+            </foreach>
+    </insert>
+
+    <!--根据主键删除数据:wechat_user  mydalgen自动生成，请勿修改-->
+    <delete id="deleteById"  >
+        <![CDATA[
+        DELETE /*MS-WECHAT-USER-DELETEBYID*/ FROM wechat_user
+        WHERE
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </delete>
+
+    <!--根据主键获取数据:wechat_user  mydalgen自动生成，请勿修改-->
+    <select id="getById" resultMap="BaseResultMap" >
+        SELECT /*MS-WECHAT-USER-GETBYID*/  <include refid="Base_Column_List" />
+        FROM wechat_user
+        WHERE
+        <![CDATA[
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </select>
+
+    <!--根据唯一约束WechatUserUserId更新表:wechat_user  mydalgen自动生成，请勿修改-->
+    <update id="updateByWechatUserUserId"  >
+        <![CDATA[
+        UPDATE /*MS-WECHAT-USER-UPDATEBYWECHATUSERUSERID*/ wechat_user
+        SET
+            PIC             = #{pic,jdbcType=VARCHAR}
+            ,NAME            = #{name,jdbcType=VARCHAR}
+            ,OPEN_ID         = #{openId,jdbcType=VARCHAR}
+            ,UNION_ID        = #{unionId,jdbcType=VARCHAR}
+        WHERE
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </update>
+
+    <!--根据唯一约束WechatUserUserId删除数据:wechat_user  mydalgen自动生成，请勿修改-->
+    <delete id="deleteByWechatUserUserId"  >
+        <![CDATA[
+        DELETE /*MS-WECHAT-USER-DELETEBYWECHATUSERUSERID*/ FROM wechat_user
+        WHERE
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </delete>
+
+    <!--根据唯一约束WechatUserUserId获取数据:wechat_user  mydalgen自动生成，请勿修改-->
+    <select id="getByWechatUserUserId" resultMap="BaseResultMap" >
+        SELECT /*MS-WECHAT-USER-GETBYWECHATUSERUSERID*/  <include refid="Base_Column_List" />
+        FROM wechat_user
+        WHERE
+        <![CDATA[
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </select>
+</mapper>

@@ -2,18 +2,18 @@ package com.lh.kafka.test.entity;
 
 
 /**
- * The table CARD
+ * The table TABLE_NAME
  */
-public class CardDO{
+public class TableNameDO{
 
     /**
      * id ID.
      */
     private Long id;
     /**
-     * idCard ID_CARD.
+     * name NAME.
      */
-    private String idCard;
+    private String name;
 
     /**
      * Set id ID.
@@ -32,18 +32,18 @@ public class CardDO{
     }
 
     /**
-     * Set idCard ID_CARD.
+     * Set name NAME.
      */
-    public void setIdCard(String idCard){
-        this.idCard = idCard;
+    public void setName(String name){
+        this.name = name;
     }
 
     /**
-     * Get idCard ID_CARD.
+     * Get name NAME.
      *
      * @return the string
      */
-    public String getIdCard(){
-        return idCard;
+    public String getName(){
+        return name;
     }
 }

@@ -3,7 +3,7 @@ package com.lh.kafka.controller;
 import com.lh.kafka.entitys.JsonResponse;
 import com.lh.kafka.entitys.ProducerRequest;
 import com.lh.kafka.error.BaseErrorCodeEnum;
-import com.lh.kafka.service.ProducerService;
+import com.lh.kafka.service.producer.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -5,12 +5,30 @@
         SELECT CONCAT('表结构不一致 tbName:',tb_name,' 期望字段:',exp_columns,' 数据库中字段:',db_columns) as msg
         FROM (
         SELECT
-        COUNT(*)= 2 as fg,'card' as tb_name,group_concat(COLUMN_NAME) db_columns,
-        'ID,ID_CARD' exp_columns
+            COUNT(*)= 6 as fg,'wechat_user' as tb_name,group_concat(COLUMN_NAME) db_columns,
+            'ID,USER_ID,PIC,NAME,OPEN_ID,UNION_ID' exp_columns
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE
-        TABLE_NAME = 'card'
-        AND COLUMN_NAME in('ID','ID_CARD')
+            TABLE_NAME = 'wechat_user'
+            AND COLUMN_NAME in('ID','USER_ID','PIC','NAME','OPEN_ID','UNION_ID')
+        GROUP BY TABLE_NAME
+    UNION ALL
+        SELECT
+            COUNT(*)= 7 as fg,'users' as tb_name,group_concat(COLUMN_NAME) db_columns,
+            'ID,PHONE,USER_PWD,REAL_NAME,USER_NAME,GENDER,STATUS' exp_columns
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE
+            TABLE_NAME = 'users'
+            AND COLUMN_NAME in('ID','PHONE','USER_PWD','REAL_NAME','USER_NAME','GENDER','STATUS')
+        GROUP BY TABLE_NAME
+    UNION ALL
+        SELECT
+            COUNT(*)= 2 as fg,'card' as tb_name,group_concat(COLUMN_NAME) db_columns,
+            'ID,ID_CARD' exp_columns
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE
+            TABLE_NAME = 'card'
+            AND COLUMN_NAME in('ID','ID_CARD')
         GROUP BY TABLE_NAME
         )a
         WHERE fg=0

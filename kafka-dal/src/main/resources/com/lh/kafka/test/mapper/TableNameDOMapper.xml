@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lh.kafka.test.mapper.CardDOMapper">
-    <!-- 自动生成,请修改 CARD.xml -->
-    <resultMap id="BaseResultMap"  type="com.lh.kafka.test.entity.CardDO">
+<mapper namespace="com.lh.kafka.test.mapper.TableNameDOMapper">
+    <!-- 自动生成,请修改 TABLE_NAME.xml -->
+    <resultMap id="BaseResultMap"  type="com.lh.kafka.test.entity.TableNameDO">
         <id column="ID" property="id" jdbcType="BIGINT" javaType="Long" />
-        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" javaType="String" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String" />
     </resultMap>
 
 
     <sql id="Base_SF_Column_List">
-        sf.ID,sf.ID_CARD
+        sf.ID,sf.NAME
     </sql>
     <sql id="Base_Column_List">
-        ID,ID_CARD
+        ID,NAME
     </sql>
 
 
-    <!--插入表:card  mydalgen自动生成，请勿修改-->
+    <!--插入表:table_name  mydalgen自动生成，请勿修改-->
     <insert id="insert"  >
             <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
                 SELECT
                 LAST_INSERT_ID()
             </selectKey>
             <![CDATA[
-            INSERT INTO card(
+            INSERT INTO table_name(
                     ID
-                    ,ID_CARD
+                    ,NAME
             )VALUES(
                      null
-                    , #{idCard,jdbcType=VARCHAR}
+                    , #{name,jdbcType=VARCHAR}
             )
             ]]>
     </insert>
 
-    <!--批量插入表:card  mydalgen自动生成，请勿修改-->
+    <!--批量插入表:table_name  mydalgen自动生成，请勿修改-->
     <insert id="insertBatch"  >
-            INSERT INTO card(
+            INSERT INTO table_name(
                     ID
-                    ,ID_CARD
+                    ,NAME
             )VALUES
             <foreach collection="list"  item="item" separator=",">
                 (
                      null
-                    , #{item.idCard,jdbcType=VARCHAR}
+                    , #{item.name,jdbcType=VARCHAR}
                 )
             </foreach>
     </insert>
 
-    <!--根据主键删除数据:card  mydalgen自动生成，请勿修改-->
+    <!--根据主键删除数据:table_name  mydalgen自动生成，请勿修改-->
     <delete id="deleteById"  >
         <![CDATA[
-        DELETE /*MS-CARD-DELETEBYID*/ FROM card
+        DELETE /*MS-TABLE-NAME-DELETEBYID*/ FROM table_name
         WHERE
             ID = #{id,jdbcType=BIGINT}
         ]]>
     </delete>
 
-    <!--根据主键获取数据:card  mydalgen自动生成，请勿修改-->
+    <!--根据主键获取数据:table_name  mydalgen自动生成，请勿修改-->
     <select id="getById" resultMap="BaseResultMap" >
-        SELECT /*MS-CARD-GETBYID*/  <include refid="Base_Column_List" />
-        FROM card
+        SELECT /*MS-TABLE-NAME-GETBYID*/  <include refid="Base_Column_List" />
+        FROM table_name
         WHERE
         <![CDATA[
             ID = #{id,jdbcType=BIGINT}

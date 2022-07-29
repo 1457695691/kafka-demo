@@ -20,7 +20,7 @@ config:
     driver: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=false&useAffectedRows=true
     username: root
-    password: test123456
+    password: ywx
     druid:
       # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       initialSize: 20
@@ -28,3 +28,5 @@ config:
       maxActive: 200
       # 最小连接池数量
       minIdle: 5
+feign.client.config.default.connectTimeout: 5000
+feign.client.config.default.readTimeout: 30000

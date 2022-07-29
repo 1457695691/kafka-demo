@@ -1,0 +1,126 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="wechat_user" physicalName="wechat_user" remark="用户微信表">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID,USER_ID,PIC,NAME,OPEN_ID 
+        ,UNION_ID
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.USER_ID,sf.PIC,sf.NAME,sf.OPEN_ID 
+        ,sf.UNION_ID
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:wechat_user" autoGen="true">
+            <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+                SELECT
+                LAST_INSERT_ID()
+            </selectKey>
+            <![CDATA[
+            INSERT INTO wechat_user(
+                    ID
+                    ,USER_ID
+                    ,PIC
+                    ,NAME
+                    ,OPEN_ID
+                    ,UNION_ID
+            )VALUES(
+                     null
+                    , #{userId,jdbcType=BIGINT}
+                    , #{pic,jdbcType=VARCHAR}
+                    , #{name,jdbcType=VARCHAR}
+                    , #{openId,jdbcType=VARCHAR}
+                    , #{unionId,jdbcType=VARCHAR}
+            )
+            ]]>
+    </operation>
+
+    <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
+    <!-- 只有一个参数且为List时必须将参数命名为list -->
+    <operation name="insertBatch" paramtype="objectList" remark="批量插入表:wechat_user"  autoGen="true">
+            INSERT INTO wechat_user(
+                    ID
+                    ,USER_ID
+                    ,PIC
+                    ,NAME
+                    ,OPEN_ID
+                    ,UNION_ID
+            )VALUES
+            <foreach collection="list"  item="item" separator=",">
+                (
+                     null
+                    , #{item.userId,jdbcType=BIGINT}
+                    , #{item.pic,jdbcType=VARCHAR}
+                    , #{item.name,jdbcType=VARCHAR}
+                    , #{item.openId,jdbcType=VARCHAR}
+                    , #{item.unionId,jdbcType=VARCHAR}
+                )
+            </foreach>
+    </operation>
+
+    <!-- 不推荐使用全 update 有需要自己打开
+    <operation name="update" paramtype="object" remark="更新表:wechat_user"  autoGen="true">
+        <![CDATA[
+        UPDATE wechat_user
+        SET
+            USER_ID         = #{userId,jdbcType=BIGINT}
+            ,PIC             = #{pic,jdbcType=VARCHAR}
+            ,NAME            = #{name,jdbcType=VARCHAR}
+            ,OPEN_ID         = #{openId,jdbcType=VARCHAR}
+            ,UNION_ID        = #{unionId,jdbcType=VARCHAR}
+        WHERE
+            ID              = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+    -->
+    <operation name="deleteById"  remark="根据主键删除数据:wechat_user">
+        <![CDATA[
+        DELETE FROM wechat_user
+        WHERE
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <operation name="getById" multiplicity="one" remark="根据主键获取数据:wechat_user">
+        SELECT *
+        FROM wechat_user
+        WHERE
+        <![CDATA[
+            ID = #{id,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <!-- 根据唯一约束操作数据 -->
+    <operation name="updateByWechatUserUserId" paramtype="object" remark="根据唯一约束WechatUserUserId更新表:wechat_user">
+        <![CDATA[
+        UPDATE wechat_user
+        SET
+            PIC             = #{pic,jdbcType=VARCHAR}
+            ,NAME            = #{name,jdbcType=VARCHAR}
+            ,OPEN_ID         = #{openId,jdbcType=VARCHAR}
+            ,UNION_ID        = #{unionId,jdbcType=VARCHAR}
+        WHERE
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <operation name="deleteByWechatUserUserId" remark="根据唯一约束WechatUserUserId删除数据:wechat_user">
+        <![CDATA[
+        DELETE FROM wechat_user
+        WHERE
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+    <operation name="getByWechatUserUserId" multiplicity="one" remark="根据唯一约束WechatUserUserId获取数据:wechat_user">
+        SELECT *
+        FROM wechat_user
+        WHERE
+        <![CDATA[
+            USER_ID         = #{userId,jdbcType=BIGINT}
+        ]]>
+    </operation>
+
+</table>
